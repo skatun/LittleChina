@@ -1,0 +1,20 @@
+// detect if somebody is home...
+
+rule "Somebody is home"
+when
+    Member of Group_CO2_Max changed or 
+    Member of Group_Noise_Max changed
+then
+    logInfo("Notification", "Noise n CO2 rule")
+    if Group_CO2_Max.state as Number > 800 or Group_Noise_Max.state as Number > 50 ){
+        Presence_Home.sendCommand(ON)
+    }
+end
+
+rule "Somebody is home2"
+when
+    Member of Group_LightSwitches changed 
+then
+    logInfo("Notification", "Switch rule")
+    Presence_Home.sendCommand(ON) 
+end   

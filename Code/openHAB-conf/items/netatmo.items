@@ -1,0 +1,45 @@
+
+
+
+Group Group_Netatmo(Group_Sensors)
+Group:Number:MAX Group_CO2_Max
+Group:Number:MAX Group_Noise_Max
+Group:Number:MAX Group_Humidity_Max
+
+Group Livingroom_Netatmo
+Number:Dimensionless Livingroom_CO2 "Co2 [%d %unit%]" <carbondioxide> (Group_Netatmo,Livingroom_Netatmo,Group_CO2_Max) { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Co2" , expire="100m" }
+Number:Temperature Livingroom_Temperature_Netatmo "Temperature [%.1f %unit%]" <temperature> (Group_Netatmo,Livingroom_Netatmo,Livingroom_Temperature)  { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Temperature" , expire="100m" }
+Number:Dimensionless Livingroom_Humidity_Netatmo "Humidity [%d %unit%]" <humidity> (Group_Netatmo,Livingroom_Netatmo,Group_Humidity_Max)     { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Humidity" , expire="100m" }
+Number:Dimensionless Livingroom_Noise_Netatmo "Noise [%d %unit%]" <soundvolume> (Group_Netatmo,Livingroom_Netatmo,Group_Noise_Max)  { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Noise" , expire="100m" }
+Number Livingroom_WifiStatus_Netatmo "WifiStatus [%s]" <signal> (Group_Netatmo,Livingroom_Netatmo)    { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:WifiStatus" , expire="100m" }
+DateTime Livingroom_TimeStamp_Netatmo "TimeStamp [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" <calendar> (Group_Netatmo,Livingroom_Netatmo) { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:TimeStamp" , expire="100m" }
+Location Livingroom_Location_Netatmo "Location" <movecontrol> (Group_Netatmo,Livingroom_Netatmo) { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Location" , expire="100m" }
+DateTime Livingroom_LastStatusStore_Netatmo "LastStatusStore [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"  <text> (Group_Netatmo,Livingroom_Netatmo) { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:LastStatusStore" , expire="100m" }
+
+Group MasterBedroom_Netatmo
+Number:Dimensionless MasterBedroom_CO2 "Co2 [%d %unit%]" <carbondioxide> (Group_Netatmo,MasterBedroom_Netatmo,Group_CO2_Max) { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:Co2" , expire="100m" }
+Number:Temperature MasterBedroom_Temperature_Netatmo "Temperature [%.1f %unit%]" <temperature> (Group_Netatmo,MasterBedroom_Netatmo,MasterBedroom_Temperature)  { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:Temperature" , expire="100m" }
+Number:Dimensionless MasterBedroom_Humidity_Netatmo "Humidity [%d %unit%]" <humidity> (Group_Netatmo,MasterBedroom_Netatmo,Group_Humidity_Max)     { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:Humidity" , expire="100m" }
+Number MasterBedroom_RFStatus_Netatmo "RFStatus [%s]" <signal> (Group_Netatmo,MasterBedroom_Netatmo)    { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:WifiStatus" , expire="100m" }
+DateTime MasterBedroom_TimeStamp_Netatmo "TimeStamp [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" <calendar> (Group_Netatmo,MasterBedroom_Netatmo) { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:TimeStamp" , expire="100m" }
+DateTime MasterBedroom_LastStatusStore_Netatmo "LastStatusStore [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"  <text> (Group_Netatmo,MasterBedroom_Netatmo) { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:LastStatusStore" , expire="100m" }
+Number MasterBedroom_Battery_Netatmo          "Battery [%.0f %%]"            <battery>    (Group_Netatmo,MasterBedroom_Netatmo)      { channel = "netatmo:NAModule1:netatmoapi:littleChina_MasterModule:BatteryVP" , expire="100m" }
+
+
+Group GuestBedroom_Netatmo
+Number:Dimensionless GuestBedroom_CO2 "Co2 [%d %unit%]" <carbondioxide> (Group_Netatmo,GuestBedroom_Netatmo,Group_CO2_Max) { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:Co2" , expire="100m" }
+Number:Temperature GuestBedroom_Temperature_Netatmo "Temperature [%.1f %unit%]" <temperature> (Group_Netatmo,GuestBedroom_Netatmo,GuestBedroom_Temperature)  { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:Temperature" , expire="100m" }
+Number:Dimensionless GuestBedroom_Humidity_Netatmo "Humidity [%d %unit%]" <humidity> (Group_Netatmo,GuestBedroom_Netatmo,Group_Humidity_Max)     { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:Humidity" , expire="100m" }
+Number GuestBedroom_RFStatus_Netatmo "RFStatus [%s]" <signal> (Group_Netatmo,GuestBedroom_Netatmo)    { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:WifiStatus" , expire="100m" }
+DateTime GuestBedroom_TimeStamp_Netatmo "TimeStamp [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" <calendar> (Group_Netatmo,GuestBedroom_Netatmo) { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:TimeStamp" , expire="100m" }
+DateTime GuestBedroom_LastStatusStore_Netatmo "LastStatusStore [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"  <text> (Group_Netatmo,GuestBedroom_Netatmo) { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:LastStatusStore" , expire="100m" }
+Number GuestBedroom_Battery_Netatmo          "Battery [%.0f %%]"            <battery>    (Group_Netatmo,GuestBedroom_Netatmo)      { channel = "netatmo:NAModule1:netatmoapi:littleChina_IndoorModule:BatteryVP" , expire="100m" }
+
+
+//Number Netatmo_Indoor_Humidex             "Humidex [%.0f]"              <temperature_hot>  { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Humidex" , expire="100m" }
+//Number:Temperature Netatmo_Indoor_HeatIndex           "HeatIndex [%.1f %unit%]"            <temperature_hot>  { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:HeatIndex" , expire="100m" }
+//Number:Temperature Netatmo_Indoor_Dewpoint            "Dewpoint [%.1f %unit%]"             <temperature_cold> { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Dewpoint" , expire="100m" }
+//Number:Temperature Netatmo_Indoor_DewpointDepression  "DewpointDepression [%.1f %unit%]"   <temperature_cold> { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:DewpointDepression" , expire="100m" }
+//Number:Pressure Netatmo_Indoor_Pressure            "Pressure [%.1f %unit%]"           <pressure>         { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:Pressure" , expire="100m" }
+//Number:Pressure Netatmo_Indoor_AbsolutePressure    "AbsolutePressure [%.1f %unit%]"   <pressure>         { channel = "netatmo:NAMain:netatmoapi:livingRoom_Netatmo:AbsolutePressure" , expire="100m" }
+

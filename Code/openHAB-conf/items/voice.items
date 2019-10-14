@@ -1,0 +1,26 @@
+Group Group_VoiceCommands
+
+Switch Livingroom_Reading_Alexa "Reading" (Group_VoiceCommands) [ "Lighting" ] 
+Switch Livingroom_Kitchen_Alexa "Kitchen" (Group_VoiceCommands) [ "Lighting" ]
+Switch Livingroom_Kitchen_Alexa "Dinner" (Group_VoiceCommands) [ "Lighting" ]
+Switch Livingroom_Kitchen_Alexa "Cooking" (Group_VoiceCommands) [ "Lighting" ]
+Switch Livingroom_Lounge_Alexa "Fireplace" (Group_VoiceCommands) [ "Lighting" ] 
+Switch Livingroom_Lounge_Alexa "Relax" (Group_VoiceCommands) [ "Lighting" ] 
+Switch Livingroom_Lounge_Alexa "Bar" (Group_VoiceCommands) [ "Lighting" ] 
+
+
+/*
+Switch Livingroom_Dinner "Dinner" [ "Lighting" ]
+Switch Alexa_Tv "TV" [ "Lighting" ]
+Switch Alexa_Lounge "Relax" [ "Lighting" ]
+Switch Alexa_FirePlace "Fireplace" [ "Lighting" ]
+Switch Alexa_Cooking "Cooking" [ "Lighting" ]
+Switch Alexa_Kitchen "Kitchen" [ "Lighting" ]
+Switch Alexa_Party "Party" [ "Lighting" ]
+Switch Alexa_LivingRoomOff "Living Room Off" [ "Lighting" ]
+Switch Alexa_Off "Lights" [ "Lighting" ]
+Switch Alexa_Night "Night" [ "Lighting" ]
+Switch Alexa_MasterBedroom "Master Bedroom" [ "Lighting" ]
+Switch Alexa_MasterBedroom_Reading "Master Bedroom Reading" [ "Lighting" ]
+Switch Alexa_Bathroom "Bathroom" [ "Lighting"]
+*/

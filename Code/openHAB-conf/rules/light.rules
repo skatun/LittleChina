@@ -1,0 +1,234 @@
+import org.eclipse.smarthome.model.script.ScriptServiceUtil
+//import java.io.File
+
+rule "Update lights"
+when
+	Member of Group_Scenes changed 
+then
+	logInfo("Notification", "Scene changed: " + triggeringItem.name.split("_").get(0))
+	var roomName= triggeringItem.name.split("_").get(0) 
+	var group =ScriptServiceUtil.getItemRegistry.getItem("Group_"+roomName +"_Lights") as GroupItem
+	var dimmer=null as DimmerItem
+	try {
+		dimmer=ScriptServiceUtil.getItemRegistry.getItem(roomName +"_Dimmer") as DimmerItem
+	} catch (ItemNotFoundException info) {
+    	logInfo("Rules", "No dimmer Item")
+	}
+	if(group === null) {
+        logError("admin", "Cannot find Item " + "Group_"+roomName +"_Lights")
+        return;
+    }
+
+	
+	if (triggeringItem.state ==0) {
+		logInfo("Notification", "Group to set OFF: " + group.name)
+		group.members.forEach[ i | i.sendCommand(OFF) ]
+		Light_All_Off.postUpdate(ON)
+		if(dimmer !== null) {
+			dimmer.postUpdate(OFF)
+		}
+	}
+	else if (triggeringItem.state ==1) {
+		logInfo("Notification", "Group to set ON: " + group.name)
+    	group.members.forEach[ i | i.sendCommand(ON) ]
+		if(dimmer !== null) {
+			dimmer.postUpdate(ON)
+		}
+	}
+	else{
+		var sceneGroup = ScriptServiceUtil.getItemRegistry.getItem( "Group_"+roomName +"_Lights" +transform("MAP", roomName+".map", ""+triggeringItem.state) ) as GroupItem
+		logInfo("Notification", "Scene to set: " + sceneGroup.name)
+		if(sceneGroup === null) {
+        	logError("admin", "Cannot find Item " + "Group_"+roomName +"_Lights" +transform("MAP", roomName+".map", ""+triggeringItem.state))
+        	return;
+    	}
+		Light_All_Off.postUpdate(ON)
+		group.members.forEach[ i |
+			if (i.getGroupNames.contains(sceneGroup.name)){
+				i.sendCommand(ON)
+			}
+			else{
+				i.sendCommand(OFF)
+			}
+        ]
+	}
+end
+
+rule "Update dimmers"
+when
+	Member of Group_Dimmers changed 
+then
+	logInfo("Notification", "Dimmer changed: " + triggeringItem.name.split("_").get(0))
+	var roomName= triggeringItem.name.split("_").get(0)
+	var group =ScriptServiceUtil.getItemRegistry.getItem("Group_"+roomName +"_Lights") as GroupItem
+	var dimmer=ScriptServiceUtil.getItemRegistry.getItem(roomName +"_Dimmer") as DimmerItem
+
+	if(group === null || dimmer === null) {
+        logError("admin", "Cannot find Item " +roomName +"_Dimmer or Group_"+roomName +"_Lights")
+        return;
+    }
+
+	group.members.forEach[ i | 
+		// We need to grab active scene, transform it to group
+		var scene =ScriptServiceUtil.getItemRegistry.getItem(roomName +"_Scene") as NumberItem 
+		//Just a nifty touch to update UI
+		//if (scene.state==0 ){
+			//scene.postUpdate(1)
+		//}
+		var sceneGroup = ScriptServiceUtil.getItemRegistry.getItem( "Group_"+roomName +"_Lights" +transform("MAP", roomName+ ".map", ""+scene.state) ) as GroupItem
+		// only dim lights if its a member of the selected group
+		if (i.getGroupNames.contains(sceneGroup.name)){
+			//Coloritems and dimmer items
+			if(i instanceof ColorItem || i instanceof DimmerItem) {
+				logInfo("Notification", "Icolor/dimmeritem: " + i.name)
+				i.sendCommand(dimmer.state.toString)	
+			}
+			//Switch item
+			else if(i instanceof SwitchItem) {
+				logInfo("Notification", "Iswitchitem: " + i.name)
+				// So normal lights get switched off when dim varue passes 50%
+				if (dimmer.state<50){
+					i.sendCommand(OFF)
+				}
+				//it could have been dimmed below 50% and then dimmed back up again
+				else{
+					i.sendCommand(ON)
+				}
+			}
+			//In case someone added light group to non light item
+			else{
+				logError("admin", "item in wrong group " +i.name)
+			}	
+		}		
+	]
+end 
+
+rule "Update color pickers"
+when
+	Member of Group_ColorPickers changed 
+then
+	logInfo("Notification", "Color changed: " + triggeringItem.name.split("_").get(0))
+	var roomName= triggeringItem.name.split("_").get(0) 
+	var group =ScriptServiceUtil.getItemRegistry.getItem("Group_"+roomName +"_Lights") as GroupItem
+	
+	if(group === null ) {
+        logError("admin", "Cannot find Item Group_"+roomName +"_Lights")
+        return;
+    }
+
+	group.members.forEach[ i | 
+		// We need to grab active scene, transform it to group
+		var scene =ScriptServiceUtil.getItemRegistry.getItem(roomName +"_Scene") as NumberItem 
+		//Just a nifty touch to update UI
+		//if (scene.state==0 ){
+			//scene.postUpdate(1)
+		//}
+		var sceneGroup = ScriptServiceUtil.getItemRegistry.getItem( "Group_"+roomName +"_Lights" +transform("MAP", roomName+ ".map", ""+scene.state) ) as GroupItem
+		// only dim lights if its a member of the selected group
+		if (i.getGroupNames.contains(sceneGroup.name)){
+			//Coloritems
+			if(i instanceof ColorItem) {
+				logInfo("Notification", "ColorItem: " + triggeringItem.state.toString)
+				i.sendCommand(triggeringItem.state.toString)	
+			}
+		}		
+	]
+end 
+
+rule "Update mood"
+when
+	Member of Group_Moods changed 
+then
+	logInfo("Notification", "Mood changed: " + triggeringItem.name.split("_").get(0))
+	var roomName= triggeringItem.name.split("_").get(0) 
+	var group =ScriptServiceUtil.getItemRegistry.getItem("Group_"+roomName +"_Lights") as GroupItem
+	
+	if(group === null ) {
+        logError("admin", "Cannot find Item Group_"+roomName +"_Lights")
+        return;
+    }
+
+	group.members.forEach[ i | 
+		// We need to grab active scene, transform it to group
+		var scene =ScriptServiceUtil.getItemRegistry.getItem(roomName +"_Scene") as NumberItem 
+		//Just a nifty touch to update UI
+		//if (scene.state==0 ){
+			//scene.postUpdate(1)
+		//}
+		var sceneGroup = ScriptServiceUtil.getItemRegistry.getItem( "Group_"+roomName +"_Lights" +transform("MAP", roomName+ ".map", ""+scene.state) ) as GroupItem
+		// only dim lights if its a member of the selected group
+		if (i.getGroupNames.contains(sceneGroup.name)){
+			//Coloritems
+			if(i instanceof ColorItem) {
+				logInfo("Notification", "Colortem: " + transform("MAP", "Moods.map", ""+triggeringItem.state))
+				i.sendCommand(transform("MAP", "Moods.map", ""+triggeringItem.state))	
+			}
+		}		
+	]
+end 
+
+rule "All lights off"
+when
+	Item Light_All_Off received command
+then
+	logInfo("Notification", "Lights off")
+	Group_Lights.members.forEach[ i |
+		if(Light_All_Off.state == ON){ 
+			i.sendCommand(ON)
+		}
+		else{
+			i.sendCommand(OFF)
+		}
+	]
+
+	Group_Scenes.members.forEach[ i |
+		if(Light_All_Off.state == ON){ 
+			i.postUpdate(1)
+		}
+		else{
+			i.postUpdate(0)
+		}
+	]
+
+	
+end
+
+rule "Voice commands"
+when
+	Member of Group_VoiceCommands changed 
+then
+	logInfo("Notification", "Scene changed by Voice")
+	var roomName = triggeringItem.name.split("_").get(0) 
+	var sceneName= triggeringItem.name.split("_").get(1) 
+
+	var sceneItem =ScriptServiceUtil.getItemRegistry.getItem(roomName +"_Scene") as NumberItem
+	logInfo("Notification", "Scene changed by Voice ..."+ transform("MAP", roomName +".map", sceneName))
+	sceneItem.sendCommand(transform("MAP", roomName +".map", sceneName))	
+end
+
+rule "Switch pressed"
+when
+    Member of Group_LightSwitches changed from OPEN to CLOSED 
+then
+	var roomName = triggeringItem.name.split("_").get(0) 
+	logInfo("Light switch", "room is now " + roomName)
+	//var sceneName= roomName+ "_Scene"//triggeringItem.name.split("_").get(1) as String
+	Presence_Home.sendCommand(ON)
+	
+	var sceneItem =ScriptServiceUtil.getItemRegistry.getItem(roomName +"_Scene") as NumberItem
+	
+	logInfo("Light switch", "Scene is now " + sceneItem.name)
+	if (sceneItem!==null){
+        if(sceneItem.state == 0){
+		    //if (vTimeOfDay.state.toString.contains("NIGHT")){
+			   //sceneItem.sendCommand(2)
+		    //}
+		   	//else{
+				sceneItem.sendCommand(1)
+		   	//}
+	    }
+	    else {
+			sceneItem.sendCommand(0)
+	    }
+	}
+end

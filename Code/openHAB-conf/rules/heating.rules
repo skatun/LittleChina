@@ -1,0 +1,28 @@
+import org.eclipse.smarthome.model.script.ScriptServiceUtil
+
+val Functions.Function3 heatings = [ NumberItem setPoint,NumberItem temperature,GenericItem relay |
+	// Turn on the heater if the temp gets more than 2 degrees below the Heating_XXXX_Setpoint to prevent rapid cycling
+	
+    if((temperature.state as Number)-1.0< (setPoint.state as Number) ) {
+		//Items connected to NO, i.e sendcommand on is ON!!
+		if(relay.state != OFF) relay.sendCommand(ON)
+	}
+	else {
+		//Items connected to NO, i.e sendcommand off is Off!!
+		if(relay.state != ON) relay.sendCommand(OFF)
+	}
+	
+			
+]
+
+rule "Update Heating"
+when
+	Member of Group_SetPoint_Command changed or 
+	Member of Group_Room_Temperature changed
+then
+	logInfo("Notification", "Foo: " + triggeringItem.name.split("_").get(0))
+	val roomName= triggeringItem.name.split("_").get(0) //as SwitchItem
+	heatings.apply(ScriptServiceUtil.getItemRegistry.getItem(roomName+"_Heating_Setpoint"),ScriptServiceUtil.getItemRegistry.getItem(roomName+"_Temperature"),ScriptServiceUtil.getItemRegistry.getItem(roomName+"_Heating"))
+end
+
+

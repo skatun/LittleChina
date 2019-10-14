@@ -1,0 +1,1 @@
+ Color LedStrip1_Light "elephant" ["Lighting"] {channel="mqtt:LedStrip1:Color" }

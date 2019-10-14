@@ -1,0 +1,13 @@
+// TTS items 
+Group Group_Alexa
+Group Group_Alexa_MasterBedroom(Group_Alexa)
+Group Group_Alexa_Livingroom(Group_Alexa)
+
+String Echo_Livingroom_TTS "Text to Speech"  (Group_Alexa_Livingroom) {channel="amazonechocontrol:echo:accountKim:echo_Livingroom:textToSpeech"}
+DateTime Echo_MasterBedroom_NextAlarm "Next alarm [%1$td/%1$tm/%1$tY %1$tH:%1$tM]" (Group_Alexa_MasterBedroom) {channel="amazonechocontrol:echo:accountKim:echo_MasterBedroom:nextAlarm"}
+DateTime Echo_MasterBedroom_NextMusicAlarm "Next music alarm [%1$td/%1$tm/%1$tY %1$tH:%1$tM]" (Group_Alexa_MasterBedroom) {channel="amazonechocontrol:echo:accountKim:echo_MasterBedroom:nextMusicAlarm"}
+
+DateTime Echo_Livingroom_NextAlarm "Next alarm [%1$td/%1$tm/%1$tY %1$tH:%1$tM]" (Group_Alexa_Livingroom) {channel="amazonechocontrol:echo:accountKim:echo_Livingroom:nextAlarm"}
+DateTime Echo_Living_NextMusicAlarm "Next music alarm [%1$td/%1$tm/%1$tY %1$tH:%1$tM]" (Group_Alexa_Livingroom) {channel="amazonechocontrol:echo:accountKim:echo_Livingroom:nextMusicAlarm"}
+
+DateTime Echo_Kitchen_NextAlarm "Next alarm [%1$td/%1$tm/%1$tY %1$tH:%1$tM]" (Group_Alexa_Livingroom) {channel="amazonechocontrol:echo:accountKim:echo_Kitchen:nextAlarm"}

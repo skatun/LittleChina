@@ -1,0 +1,394 @@
+//import java.math.BigDecimal
+//import java.util.Calendar
+
+rule "Adjust Fan"
+when
+    Item Bathroom_Scene changed or 
+    Item Livingroom_Scene changed or 
+    Item Group_CO2_Max changed or
+    Item Group_Humidity_Max changed or
+    Item Group_Humidity_Min changed or
+    Item vTimeOfDay changed or 
+    Item Presence_Home changed
+then
+    logInfo("Notification", "Fan rule")
+    // we run fan on low when we are away, if its night and CO2 level is below 2500
+    if  (Presence_Home.state==OFF ){
+        logInfo("Notification", "Fan low, we run fan on low when we are away, if its night and CO2 level is below 2500")
+        if (VillaventFan.state as Number !=1) { VillaventFan.sendCommand(1)}
+    }
+    else {
+     
+        if (vTimeOfDay.state.toString.contains("NIGHT")==false ){
+            if ((Group_CO2_Max.state as Number) <800) {
+                logInfo("Notification", "Fan low, we run fan on medium when we are home and CO2 level is  below 800ppm")
+                if (VillaventFan.state as Number !=1) { VillaventFan.sendCommand(1)}
+            }
+            else if ((Group_CO2_Max.state as Number) >= 1400){
+                logInfo("Notification", "Fan low, we run fan on max when we are home and CO2 level is above 1400ppm")
+                if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+            }
+        }
+        /*
+        // Turn fan on max when entering bathroom for 3minutes and its daytime and we are home
+        if (Bathroom_Scene.state as Number > 0 ){
+            logInfo("Notification", "Fan Max, Turn fan on max when entering bathroom for 3minutes and its daytime and we are home")
+            if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+            createTimer(now.plusSeconds(300))[|
+                if (VillaventFan.state as Number !=1) { VillaventFan.sendCommand(1)}
+            ]
+        }
+
+        // Turn fan on max when cooking for 30minutes and its daytime and we are home
+        if (Livingroom_Scene.state as Number ==7 ){
+            logInfo("Notification", "Fan Max, Turn fan on max when cooking for 30minutes and its daytime and we are home")
+            if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+            createTimer(now.plusSeconds(3000))[|
+                if (VillaventFan.state as Number !=1) { VillaventFan.sendCommand(1)}
+            ]
+        }
+        */
+        
+        else {
+            if (Group_CO2_Max.state as Number >= 2500){
+                logInfo("Notification", "Fan low, we run fan on max when we are home and CO2 level is above 2500ppm at night")
+                if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+            }
+        }
+    }
+end
+
+/*
+
+
+
+rule "Adjust Fan"
+when
+    Item Bathroom_Scene changed or 
+    Item Livingroom_Scene changed or 
+    Item Group_CO2_Max changed or
+    Item Group_Humidity_Max changed or
+    Item Group_Humidity_Min changed or
+    Item vTimeOfDay changed or 
+    Item Presence_Home changed
+then
+    logInfo("Notification", "Fan rule")
+    // we run fan on low when we are away, if its night and CO2 level is below 2500
+    if  (Presence_Home.state==OFF || (vTimeOfDay.state.toString.contains("NIGHT") && Group_CO2_Max.state as Number > 2500 ) ) {
+        logInfo("Notification", "Fan low, we run fan on low when we are away, if its night and CO2 level is below 2500")
+        if (VillaventFan.state as Number !=1) { VillaventFan.sendCommand(1)}
+    }
+
+     
+    // we run fan on medium when we are home and its night and CO2 level is above 2500 below 3000
+    if  (Presence_Home.state==ON && vTimeOfDay.state.toString.contains("NIGHT") && Group_CO2_Max.state as Number >= 2500 && Group_CO2_Max.state as Number < 3000 ) { //
+         logInfo("Notification", "Fan medium, we run fan on medium when we are home and its night and CO2 level is above 2500 below 3000")
+        if (VillaventFan.state as Number !=2) { VillaventFan.sendCommand(2)}
+    }
+   
+    // we run fan on max when we are home and its night and CO2 level is above 3000
+    if  (Presence_Home.state==ON && vTimeOfDay.state.toString.contains("NIGHT") && Group_CO2_Max.state as Number >= 3000  ){
+         logInfo("Notification", "Fan max, we run fan on max when we are home and its night and CO2 level is above 3000")
+        if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+    }
+    
+
+    // Turn fan on max when entering bathroom for 3minutes and its daytime and we are home
+    if ( Presence_Home.state==ON && Bathroom_Scene.state as Number > 0  && vTimeOfDay.state.toString.contains("NIGHT")==false ){
+        logInfo("Notification", "Fan Max, Turn fan on max when entering bathroom for 3minutes and its daytime and we are home")
+        if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+        createTimer(now.plusSeconds(300))[|
+            if (VillaventFan.state as Number !=1) { VillaventFan.sendCommand(1)}
+        ]
+    }
+    
+    // Turn fan on max when cooking for 30minutes and its daytime and we are home
+    if ( Presence_Home.state==ON && Livingroom_Scene.state as Number ==7  && vTimeOfDay.state.toString.contains("NIGHT")==false ){
+        logInfo("Notification", "Fan Max, Turn fan on max when cooking for 30minutes and its daytime and we are home")
+        if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+        createTimer(now.plusSeconds(3000))[|
+            if (VillaventFan.state as Number !=1) { VillaventFan.sendCommand(1)}
+        ]
+    }
+ 
+    /*
+
+    // we run fan on medium when we are home and its day and CO2 level is above 1000 below 1500
+    if  (Presence_Home.state==ON &&  vTimeOfDay.state.toString.contains("NIGHT")==false  && Group_CO2_Max.state as Number >= 1000 && Group_CO2_Max.state as Number < 1500 ){
+         logInfo("Notification", "Fan medium, we run fan on medium when we are home and its day and CO2 level is above 1000 below 1500")
+        if (VillaventFan.state as Number !=2) { VillaventFan.sendCommand(2)}
+    }
+    
+    // we run fan on max when we are home and its day and CO2 level is above 1500
+    if  (Presence_Home.state==ON &&  vTimeOfDay.state.toString.contains("NIGHT")==false  && Group_CO2_Max.state as Number >= 1500 ){
+         logInfo("Notification", "Fan max, we run fan on max when we are home and its day and CO2 level is above 1500")
+        if (VillaventFan.state as Number !=3) { VillaventFan.sendCommand(3)}
+    }
+
+
+    // we run fan on medium when we are home and its day and humidty level is above 70%
+    if  (Presence_Home.state==ON &&  vTimeOfDay.state.toString.contains("NIGHT")==false  && Group_Humidity_Max.state as Number >= 70  ){
+         logInfo("Notification", "Fan medium, we run fan on medium when we are home and its day and humidty level is above 70%")
+        if (VillaventFan.state as Number !=2) { VillaventFan.sendCommand(2)}
+    }
+
+    // we run fan on medium when we are home and its day and humidity level is below 40%
+    if  (Presence_Home.state==ON &&  vTimeOfDay.state.toString.contains("NIGHT")==false  && Group_Humidity_Min.state as Number <= 40 ){
+         logInfo("Notification", "Fan max, we run fan on medium when we are home and its day and humidity level is below 40%")
+        if (VillaventFan.state as Number !=2) { VillaventFan.sendCommand(2)}
+    }
+
+    
+end
+*/
+
+/*
+rule "Villavent home"
+when
+    Item PresenceState changed to HOME
+then
+    VillaventFan.sendCommand(2)
+    VillaventDigital7.sendCommand(OFF)
+end
+
+rule "Villavent away"
+when
+    Item PresenceState changed to AWAY
+then
+    VillaventFan.sendCommand(1)
+    VillaventDigital7.sendCommand(ON)
+end
+
+rule "Correct supply air temp"
+when
+    Item VillaventSupplyAirTemp_in changed
+then
+    val BigDecimal ret = (VillaventSupplyAirTemp_in.state as DecimalType).toBigDecimal.movePointLeft(1)
+    VillaventSupplyAirTemp.postUpdate(new DecimalType(ret))
+end
+
+rule "Correct extract air temp"
+when
+    Item VillaventExtractAirTemp_in changed
+then
+    val BigDecimal ret = (VillaventExtractAirTemp_in.state as DecimalType).toBigDecimal.movePointLeft(1)
+    VillaventExtractAirTemp.postUpdate(new DecimalType(ret))
+end
+
+rule "Correct exhaust air temp"
+when
+    Item VillaventExhaustAirTemp_in changed
+then
+    val BigDecimal ret = (VillaventExhaustAirTemp_in.state as DecimalType).toBigDecimal.movePointLeft(1)
+    VillaventExhaustAirTemp.postUpdate(new DecimalType(ret))
+end
+
+rule "Correct protect air temp"
+when
+    Item VillaventProtectAirTemp_in changed
+then
+    val BigDecimal ret = (VillaventProtectAirTemp_in.state as DecimalType).toBigDecimal.movePointLeft(1)
+    VillaventProtectAirTemp.postUpdate(new DecimalType(ret))
+end
+
+rule "Correct intake air temp"
+when
+    Item VillaventIntakeAirTemp_in changed
+then
+    val BigDecimal ret = (VillaventIntakeAirTemp_in.state as DecimalType).toBigDecimal.movePointLeft(1)
+    VillaventIntakeAirTemp.postUpdate(new DecimalType(ret))
+end
+
+rule "Filter alert"
+when
+    Item VillaventFilterDays changed
+then
+    if (((VillaventFilterDays.state as DecimalType).intValue % Math::round(((VillaventFilterPeriod.state as DecimalType).intValue * 30.5) - 30)) == 0) {
+        pushover("WARN: Villavent filter replacement is due")
+    } else {
+        if ((VillaventFilterDays.state as DecimalType).intValue >= (VillaventFilterPeriod.state as DecimalType).intValue * 30.5) {
+            pushover("ERROR: Villavent filter replacement overdue")
+        }
+    }
+end
+
+rule "VV read clock"
+when
+    Item VillaventClockS changed
+then
+    var Calendar cal = Calendar::getInstance()
+    cal.set(Calendar::HOUR_OF_DAY, (VillaventClockH.state as DecimalType).intValue)
+    cal.set(Calendar::MINUTE, (VillaventClockM.state as DecimalType).intValue)
+    cal.set(Calendar::SECOND, (VillaventClockS.state as DecimalType).intValue)
+    cal.set(Calendar::DAY_OF_MONTH, (VillaventClockD.state as DecimalType).intValue)
+    cal.set(Calendar::MONTH, (VillaventClockMNTH.state as DecimalType).intValue)
+    cal.set(Calendar::YEAR, (VillaventClockY.state as DecimalType).intValue+2000)
+    cal.clear(Calendar::MILLISECOND)
+    VillaventClock.postUpdate(new DateTimeType(cal))
+end
+
+rule "VV write clock"
+when
+    System started or
+    Time cron "0 0 6 * * ?"
+then
+    var Calendar cal = Calendar::getInstance()
+    VillaventClockH.sendCommand(cal.get(Calendar::HOUR_OF_DAY))
+    VillaventClockM.sendCommand(cal.get(Calendar::MINUTE))
+    VillaventClockS.sendCommand(cal.get(Calendar::SECOND))
+
+    VillaventClockD.sendCommand(cal.get(Calendar::DAY_OF_MONTH))
+    VillaventClockMNTH.sendCommand(cal.get(Calendar::MONTH))
+    VillaventClockY.sendCommand(cal.get(Calendar::YEAR)-2000)
+end
+
+rule "Write NVM"
+when
+    Time is midnight
+then
+    VillaventNvm.sendCommand(165)
+end
+
+rule "Villavent Program Version"
+when
+    System started or
+    Item VillaventProgVH changed or
+    Item VillaventProgVM changed or
+    Item VillaventProgVL changed or
+    Time is midnight
+then
+    VillaventProgVersion.postUpdate(String::format("%1$d.%2$02d.%3$02d",
+        (VillaventProgVH.state as DecimalType).intValue,
+        (VillaventProgVM.state as DecimalType).intValue,
+        (VillaventProgVL.state as DecimalType).intValue
+    ))
+end
+
+rule "Villavent Boot Version"
+when
+    System started or
+    Item VillaventBootVH changed or
+    Item VillaventBootVM changed or
+    Item VillaventBootVL changed or
+    Time is midnight
+then
+    VillaventBootVersion.postUpdate(String::format("%1$d.%2$02d.%3$02d",
+        (VillaventBootVH.state as DecimalType).intValue,
+        (VillaventBootVM.state as DecimalType).intValue,
+        (VillaventBootVL.state as DecimalType).intValue
+    ))
+end
+
+rule "Villavent filter alarm"
+when
+    Item VillaventFilterAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent filter")
+end
+
+rule "Villavent filter ok"
+when
+    Item VillaventFilterAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent filter")
+end
+
+rule "Villavent fan alarm"
+when
+    Item VillaventFanAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent fan")
+end
+
+rule "Villavent fan ok"
+when
+    Item VillaventFanAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent fan")
+end
+
+rule "Villavent rotor alarm"
+when
+    Item VillaventRotorAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent rotor")
+end
+
+rule "Villavent rotor ok"
+when
+    Item VillaventRotorAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent rotor")
+end
+
+rule "Villavent frost alarm"
+when
+    Item VillaventFrostAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent frost")
+end
+
+rule "Villavent frost ok"
+when
+    Item VillaventFrostAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent frost")
+end
+
+rule "Villavent PCU-PB alarm"
+when
+    Item VillaventPcuPbAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent PCU-PB")
+end
+
+rule "Villavent PCU-PB ok"
+when
+    Item VillaventPcuPbAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent PCU-PB")
+end
+
+rule "Villavent temp sensor alarm"
+when
+    Item VillaventTempSensorAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent temp sensor")
+end
+
+rule "Villavent temp sensor ok"
+when
+    Item VillaventTempSensorAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent temp sensor")
+end
+
+rule "Villavent thermostat alarm"
+when
+    Item VillaventThermostatAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent emergency thermostat")
+end
+
+rule "Villavent thermostat ok"
+when
+    Item VillaventThermostatAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent emergency thermostat")
+end
+
+rule "Villavent damper alarm"
+when
+    Item VillaventDamperAlarm changed from OFF to ON
+then
+    pushover("ERROR: Villavent damper")
+end
+
+rule "Villavent damper ok"
+when
+    Item VillaventDamperAlarm changed from ON to OFF
+then
+    pushover("OK: Villavent damper")
+end
+
+*/

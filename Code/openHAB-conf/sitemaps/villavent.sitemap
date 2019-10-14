@@ -1,0 +1,142 @@
+sitemap villavent label="villavent" {
+	Selection item=VillaventTempLvl mappings=[11="22 °C", 10="21 °C", 9="20 °C", 8="19 °C", 7="18 °C", 6="17 °C", 5="16 °C", 4="15 °C", 3="14 °C", 2="13 °C", 1="12° C", 0="Summer mode"]
+	Selection item=VillaventFan icon=qualityofservice mappings=[4="Auto", 3="Max", 2="Normal", 1="Low", 0="Off"]
+	Text item=VillaventSupplyAirTemp {
+		Switch item=VillaventSupplyAirGraph label="Graph period" mappings=[1="Hour", 2="Day", 3="Week", 4="Month", 5="Year"]
+		Chart item=VillaventSupplyAirTemp period=h refresh=30000 visibility=[VillaventSupplyAirGraph==1]
+		Chart item=VillaventSupplyAirTemp period=D refresh=900000 visibility=[VillaventSupplyAirGraph==2]
+		Chart item=VillaventSupplyAirTemp period=W refresh=3600000 visibility=[VillaventSupplyAirGraph==3]
+		Chart item=VillaventSupplyAirTemp period=M refresh=3600000 visibility=[VillaventSupplyAirGraph==4]
+		Chart item=VillaventSupplyAirTemp period=Y refresh=3600000 visibility=[VillaventSupplyAirGraph==5]
+	}
+	Text item=VillaventSupplyFanRpm {
+		Switch item=VillaventSupplyFanGraph label="Graph period" mappings=[1="Hour", 2="Day", 3="Week", 4="Month", 5="Year"]
+		Chart item=VillaventSupplyFanRpm period=h refresh=30000 visibility=[VillaventSupplyFanGraph==1]
+		Chart item=VillaventSupplyFanRpm period=D refresh=900000 visibility=[VillaventSupplyFanGraph==2]
+		Chart item=VillaventSupplyFanRpm period=W refresh=3600000 visibility=[VillaventSupplyFanGraph==3]
+		Chart item=VillaventSupplyFanRpm period=M refresh=3600000 visibility=[VillaventSupplyFanGraph==4]
+		Chart item=VillaventSupplyFanRpm period=Y refresh=3600000 visibility=[VillaventSupplyFanGraph==5]
+	}
+	Text item=VillaventExtractAirTemp {
+		Switch item=VillaventExtractAirGraph label="Graph period" mappings=[1="Hour", 2="Day", 3="Week", 4="Month", 5="Year"]
+		Chart item=VillaventExtractAirTemp period=h refresh=30000 visibility=[VillaventExtractAirGraph==1]
+		Chart item=VillaventExtractAirTemp period=D refresh=900000 visibility=[VillaventExtractAirGraph==2]
+		Chart item=VillaventExtractAirTemp period=W refresh=3600000 visibility=[VillaventExtractAirGraph==3]
+		Chart item=VillaventExtractAirTemp period=M refresh=3600000 visibility=[VillaventExtractAirGraph==4]
+		Chart item=VillaventExtractAirTemp period=Y refresh=3600000 visibility=[VillaventExtractAirGraph==5]
+	}
+	Text item=VillaventExtractFanRpm {
+		Switch item=VillaventExtractFanGraph label="Graph period" mappings=[1="Hour", 2="Day", 3="Week", 4="Month", 5="Year"]
+		Chart item=VillaventExtractFanRpm period=h refresh=30000 visibility=[VillaventExtractFanGraph==1]
+		Chart item=VillaventExtractFanRpm period=D refresh=900000 visibility=[VillaventExtractFanGraph==2]
+		Chart item=VillaventExtractFanRpm period=W refresh=3600000 visibility=[VillaventExtractFanGraph==3]
+		Chart item=VillaventExtractFanRpm period=M refresh=3600000 visibility=[VillaventExtractFanGraph==4]
+		Chart item=VillaventExtractFanRpm period=Y refresh=3600000 visibility=[VillaventExtractFanGraph==5]
+	}
+	Text item=VillaventIntakeAirTemp {
+		Switch item=VillaventIntakeAirGraph label="Graph period" mappings=[1="Hour", 2="Day", 3="Week", 4="Month", 5="Year"]
+		Chart item=VillaventIntakeAirTemp period=h refresh=30000 visibility=[VillaventIntakeAirGraph==1]
+		Chart item=VillaventIntakeAirTemp period=D refresh=900000 visibility=[VillaventIntakeAirGraph==2]
+		Chart item=VillaventIntakeAirTemp period=W refresh=3600000 visibility=[VillaventIntakeAirGraph==3]
+		Chart item=VillaventIntakeAirTemp period=M refresh=3600000 visibility=[VillaventIntakeAirGraph==4]
+		Chart item=VillaventIntakeAirTemp period=Y refresh=3600000 visibility=[VillaventIntakeAirGraph==5]
+	}
+	Text item=Villavent label="Configuration" icon=settings {
+		Frame label="Information" {
+			Text item=VillaventSystemType
+			Text item=VillaventClock
+			Text item=VillaventProgVersion
+			Text item=VillaventBootVersion
+		}
+		Frame label="Fan" {
+			Selection item=VillaventFanControlType mappings=[0="Air flow", 1="Speed"]
+			Selection item=VillaventFlowUnits mappings=[0="l/s", 1="m3/h"]
+			Setpoint item=VillaventSupplyFanSystemCurve minValue=0 maxValue=20 step=1
+			Setpoint item=VillaventExtractFanSystemCurve minValue=0 maxValue=10 step=1
+			Setpoint item=VillaventSupplyFanSpeedLow minValue=10 maxValue=100 step=1
+			Setpoint item=VillaventExtractFanSpeedLow minValue=10 maxValue=100 step=1
+			Setpoint item=VillaventSupplyFanSpeedNom minValue=10 maxValue=100 step=1
+			Setpoint item=VillaventExtractFanSpeedNom minValue=10 maxValue=100 step=1
+			Setpoint item=VillaventSupplyFanSpeedHigh minValue=10 maxValue=100 step=1
+			Setpoint item=VillaventExtractFanSpeedHigh minValue=10 maxValue=100 step=1
+			Switch item=VillaventAllowFanStop
+		}
+		Frame label="Filter" {
+			Setpoint item=VillaventFilterPeriod minValue=6 maxValue=12 step=1 label="Replace interval"
+			Text item=VillaventFilterDays label="Days since last replace"
+		}
+		Frame label="Heater and cooler" {
+			Selection item=VillaventHeaterType mappings=[3="Contactor", 2="Electrical", 1="Water", 0="None"]
+			Text item=VillaventHeaterRelay
+			Selection item=VillaventPreHeaterType mappings=[1="Electrical", 0="None"]
+			Text item=VillaventPreHeaterRelay
+			Selection item=VillaventCoolerType mappings=[1="Water", 0="None"]
+			Text item=VillaventCommonHeaterRelay
+			Selection item=VillaventFrostProtection mappings=[120="12° C", 110="11° C", 100="10° C", 90="9° C", 80="8° C", 70="7° C"]
+			Switch item=VillaventDigital4
+			Text item=VillaventHeatSetpoint
+		}
+		Frame label="Rotor" {
+			Text item=VillaventRotorState label="State"
+			Text item=VillaventRotorRelayActive label="Relay"
+			Text item=VillaventDigital6 label="Rotation sensor"
+		}
+		Frame label="Defrosting" {
+			Text item=VillaventDefrostState label="State"
+			Selection item=VillaventDefrostMode mappings=[0="0", 1="1", 2="2", 3="3", 4="4", 5="5"] label="Mode"
+		}
+		Frame label="Digital inputs" {
+			Switch item=VillaventDigital7
+		}
+		Frame label="" {
+			Switch item=VillaventDigital1
+			Selection item=VillaventDigital1SF mappings=[3="Max", 2="Normal", 1="Low", 0="Off"]
+			Selection item=VillaventDigital1EF mappings=[3="Max", 2="Normal", 1="Low", 0="Off"]
+		}
+		Frame label="" {
+			Switch item=VillaventDigital2
+			Selection item=VillaventDigital2SF mappings=[3="Max", 2="Normal", 1="Low", 0="Off"]
+			Selection item=VillaventDigital2EF mappings=[3="Max", 2="Normal", 1="Low", 0="Off"]
+		}
+		Frame label="" {
+			Switch item=VillaventDigital3
+			Selection item=VillaventDigital3SF mappings=[3="Max", 2="Normal", 1="Low", 0="Off"]
+			Selection item=VillaventDigital3EF mappings=[3="Max", 2="Normal", 1="Low", 0="Off"]
+		}
+		Frame label="" {
+			Switch item=VillaventDigital5
+			Setpoint item=VillaventDigital5Min minValue=1 maxValue=60 step=1
+			Selection item=VillaventDigital5Speed mappings=[3="Max", 2="Normal", 1="Low", 0="Off"]
+		}
+		Frame label="Temperature sensors" {
+			Text item=VillaventSupplyAirTemp
+			Text item=VillaventSupplyAirTempFault
+			Text item=VillaventExtractAirTemp
+			Text item=VillaventExtractAirTempFault
+			Text item=VillaventExhaustAirTemp
+			Text item=VillaventExhaustAirTempFault
+			Text item=VillaventProtectAirTemp
+			Text item=VillaventProtectAirTempFault
+			Text item=VillaventIntakeAirTemp
+			Text item=VillaventIntakeAirTempFault
+		}
+		Frame label="Alarms" {
+			Text item=VillaventFilterAlarm
+			Text item=VillaventFanAlarm
+			Text item=VillaventRotorAlarm
+			Text item=VillaventFrostAlarm
+			Text item=VillaventPcuPbAlarm
+			Text item=VillaventTempSensorAlarm
+			Text item=VillaventThermostatAlarm
+			Text item=VillaventDamperAlarm
+		}
+	}
+	Text item=VillaventTemperatureGroup label="Temperature graph" icon=line {
+		Switch item=VillaventTemperatureGroupGraph label="Graph period" mappings=[1="Hour", 2="Day", 3="Week", 4="Month", 5="Year"]
+		Chart item=VillaventTemperatureGroup period=h refresh=30000 visibility=[VillaventTemperatureGroupGraph==1]
+		Chart item=VillaventTemperatureGroup period=D refresh=900000 visibility=[VillaventTemperatureGroupGraph==2]
+		Chart item=VillaventTemperatureGroup period=W refresh=3600000 visibility=[VillaventTemperatureGroupGraph==3]
+		Chart item=VillaventTemperatureGroup period=M refresh=3600000 visibility=[VillaventTemperatureGroupGraph==4]
+		Chart item=VillaventTemperatureGroup period=Y refresh=3600000 visibility=[VillaventTemperatureGroupGraph==5]
+	}
+}

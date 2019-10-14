@@ -1,0 +1,117 @@
+Group Villavent
+
+Group VillaventTemperatureGroup
+Number VillaventTemperatureGroupGraph
+
+Number VillaventNvm "Store NVM" (Villavent) 
+
+Number VillaventFan "Fan speed" <fan> (Villavent, Persist) 
+Number VillaventSupplyFanRpm "Supply fan RPM [%d]" <fan> (Villavent, Persist) 
+Number VillaventSupplyFanGraph (PersistAndRestore)
+Number VillaventExtractFanRpm "Extract fan RPM [%d]" <fan> (Villavent, Persist) 
+Number VillaventExtractFanGraph (PersistAndRestore)
+
+Number VillaventFrostProtection "Frost protection level [%d]" <temperature> (Villavent, Persist) 
+Number VillaventTempLvl "Temperature level [%d]" <heating> (Villavent, Persist) 
+Number VillaventHeatSetpoint "Set temperature" <heating> (Villavent, Persist) 
+
+Number VillaventSupplyAirTemp "Supply air temperature [%.1f °C]" <temperature> (Villavent, VillaventTemperatureGroup, Temperature)
+Number VillaventSupplyAirTemp_in "Supply air temperature [%d]" (Villavent) 
+Number VillaventSupplyAirGraph (PersistAndRestore)
+
+Number VillaventExtractAirTemp "Extract air temperature [%.1f °C]" <temperature> (Villavent, VillaventTemperatureGroup, Temperature)
+Number VillaventExtractAirTemp_in "Extract air temperature [%d]" (Villavent) 
+Number VillaventExtractAirGraph (PersistAndRestore)
+
+Number VillaventExhaustAirTemp "Exhaust air temperature [%.1f °C]" <temperature> (Villavent)
+Number VillaventExhaustAirTemp_in "Exhaust air temperature [%d]" (Villavent) 
+Number VillaventExhaustAirGraph (PersistAndRestore)
+
+Number VillaventProtectAirTemp "Overheating/Frosprotection temperature [%.1f °C]" <temperature> (Villavent, VillaventTemperatureGroup, Temperature)
+Number VillaventProtectAirTemp_in "Overheating/Frosprotection temperature [%d]" (Villavent) 
+Number VillaventProtectAirGraph (PersistAndRestore)
+
+Number VillaventIntakeAirTemp "Intake air temperature [%.1f °C]" <temperature> (Villavent, VillaventTemperatureGroup, Temperature)
+Number VillaventIntakeAirTemp_in "Intake air temperature [%d]" (Villavent) 
+Number VillaventIntakeAirGraph (PersistAndRestore)
+
+Number VillaventHeaterType "Heater type" <smoke> (Villavent, Persist) 
+Number VillaventCoolerType "Cooler type" <climate> (Villavent, Persist) 
+Number VillaventPreHeaterType "Pre-heater type" <smoke> (Villavent, Persist) 
+
+Number VillaventFlowUnits "Fan speed flow unit" <pressure> (Villavent, Persist) 
+Number VillaventFanControlType "Fan control" <flow> (Villavent, Persist) 
+Number VillaventAllowFanStop "Control panel fan stop allowed" <switch> (Villavent, Persist) 
+
+Number VillaventSupplyFanSystemCurve "Supply fan system curve [%d]" <line> (Villavent, Persist) 
+Number VillaventSupplyFanSpeedLow "Supply fan speed for low [%d]" <fan> (Villavent, Persist) 
+Number VillaventSupplyFanSpeedNom "Supply fan speed for nominal [%d]" <fan> (Villavent, Persist) 
+Number VillaventSupplyFanSpeedHigh "Supply fan speed for high [%d]" <fan> (Villavent, Persist) 
+
+Number VillaventExtractFanSystemCurve "Extract fan system curve [%d]" <line> (Villavent, Persist) 
+Number VillaventExtractFanSpeedLow "Extract fan speed for low [%d]" <fan> (Villavent, Persist) 
+Number VillaventExtractFanSpeedNom "Extract fan speed for nominal [%d]" <fan> (Villavent, Persist) 
+Number VillaventExtractFanSpeedHigh "Extract fan speed for high [%d]" <fan> (Villavent, Persist) 
+
+Number VillaventRotorState "Rotor state [MAP(vvrotstate.map):%s]" <sun> (Villavent, Persist) 
+Switch VillaventRotorRelayActive "Rotor relay [%s]" <switch> (Villavent, VillaventTemperatureGroup, Persist) 
+
+Number VillaventDefrostState "Defrosting state [MAP(vvdefrstate.map):%s]" <rain> (Villavent, Persist) 
+Number VillaventDefrostMode "Defrosting mode [%d]" <qualityofservice> (Villavent, Persist) 
+
+Number VillaventFilterPeriod "Filter replace time [%d months]" <calendar> (Villavent, Persist) 
+Number VillaventFilterDays "Filter days since last replacement [%d days]" <time> (Villavent, Persist) 
+
+Number VillaventSystemType "System type [MAP(vvsystype.map):%s]" <contact> (Villavent, Persist) 
+
+String VillaventProgVersion "Program version [%s]" <shield> (Villavent, Persist)
+Number VillaventProgVH (Villavent) 
+Number VillaventProgVM (Villavent) 
+Number VillaventProgVL (Villavent) 
+String VillaventBootVersion "Boot version [%s]" <shield> (Villavent, Persist)
+Number VillaventBootVH (Villavent) 
+Number VillaventBootVM (Villavent) 
+Number VillaventBootVL (Villavent) 
+
+DateTime VillaventClock "Clock [%s]" <time> (Villavent)
+Number VillaventClockS "Clock seconds [%d]" (Villavent) 
+Number VillaventClockM "Clock minutes [%d]" (Villavent) 
+Number VillaventClockH "Clock hours [%d]" (Villavent) 
+Number VillaventClockD "Clock day of month [%d]" (Villavent) 
+Number VillaventClockMNTH "Clock month [%d]" (Villavent) 
+Number VillaventClockY "Clock year [%d]" (Villavent) 
+
+Switch VillaventSupplyAirTempFault "Supply air temperature sensor fault [%s]" <siren> (Villavent, Persist) 
+Switch VillaventExtractAirTempFault "Extract air temperature sensor fault [%s]" <siren> (Villavent, Persist) 
+Switch VillaventExhaustAirTempFault "Exhaust air temperature sensor fault [%s]" <siren> (Villavent, Persist) 
+Switch VillaventProtectAirTempFault "Overheating/Frostprotection temperature sensor fault [%s]" <siren> (Villavent, Persist) 
+Switch VillaventIntakeAirTempFault "Intake air temperature sensor fault [%s]" <siren> (Villavent, Persist) 
+
+Switch VillaventDigital1 "Digital input 1 [%s]" <switch> (Villavent, Persist) 
+Number VillaventDigital1SF "Supply fan speed at DI1 [%s]" <fan> (Villavent, Persist) 
+Number VillaventDigital1EF "Extract fan speed at DI1 [%s]" <fan> (Villavent, Persist) 
+Switch VillaventDigital2 "Digital input 2 [%s]" <switch> (Villavent, Persist) 
+Number VillaventDigital2SF "Supply fan speed at DI2 [%s]" <fan> (Villavent, Persist) 
+Number VillaventDigital2EF "Extract fan speed at DI2 [%s]" <fan> (Villavent, Persist) 
+Switch VillaventDigital3 "Digital input 3 [%s]" <switch> (Villavent, Persist) 
+Number VillaventDigital3SF "Supply fan speed at DI3 [%s]" <fan> (Villavent, Persist) 
+Number VillaventDigital3EF "Extract fan speed at DI3 [%s]" <fan> (Villavent, Persist) 
+Switch VillaventDigital4 "Stop heat [%s]" <switch> (Villavent, Persist) 
+Switch VillaventDigital5 "Extended run [%s]" <switch> (Villavent, Persist) 
+Number VillaventDigital5Min "Extended running time [%d]" <time> (Villavent, Persist) 
+Number VillaventDigital5Speed "Extended running speed [%d]" <fan> (Villavent, Persist) 
+Switch VillaventDigital6 "Rotor top sensor [%s]" <switch> (Villavent, Persist) 
+Switch VillaventDigital7 "Away [%s]" <switch> (Villavent, Persist) 
+
+Switch VillaventFilterAlarm "Filter alarm [%s]" <siren> (Villavent, Persist) 
+Switch VillaventFanAlarm "Fan alarm [%s]" <siren> (Villavent, Persist) 
+Switch VillaventRotorAlarm "Rotor alarm [%s]" <siren> (Villavent, Persist) 
+Switch VillaventFrostAlarm "Frost alarm [%s]" <siren> (Villavent, Persist) 
+Switch VillaventPcuPbAlarm "PCU-PB alarm [%s]" <siren> (Villavent, Persist) 
+Switch VillaventTempSensorAlarm "Temperature sensor alarm [%s]" <siren> (Villavent, Persist) 
+Switch VillaventThermostatAlarm "Emergency thermostat alarm [%s]" <siren> (Villavent, Persist) 
+Switch VillaventDamperAlarm "Damper alarm [%s]" <siren> (Villavent, Persist) 
+
+Switch VillaventPreHeaterRelay "Preheater relay [%s]" <switch> (Villavent, Persist) 
+Switch VillaventHeaterRelay "Heater relay [%s]" <switch> (Villavent, Persist) 
+Switch VillaventCommonHeaterRelay "Common relay [%s]" <switch> (Villavent, Persist) 

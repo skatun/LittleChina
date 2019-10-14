@@ -1,0 +1,8 @@
+Group Group_Sensors
+
+Switch Door_Opener "Door" (Group_Hallway)[ "Lighting" ] { gpio="pin:12" ,expire="6s,OFF"}  //Relay 1
+Contact Door_Bell {gpio="pin:90 debounce:50 activelow:no"}
+Number DoorBellChanges
+
+Switch bar_wine "Wine" (Group_Livingroom) [ "Lighting" ]{ serial="/dev/ttyUSB1@9600,ON(4\n),OFF(3\n)" }
+Switch bar_spirit "Spirit" (Group_Livingroom) [ "Lighting" ]{ serial="/dev/ttyUSB1@9600,ON(2\n),OFF(1\n)"}

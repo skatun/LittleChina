@@ -1,0 +1,7 @@
+rule "Update Miflora Timestamp"
+when
+	Member of Group_Miflora_Light changed
+then
+	postUpdate( "Miflora_" + triggeringItem.name.split("_").get(1) + "_LastStatusStore", new DateTimeType().toString() )
+end
+

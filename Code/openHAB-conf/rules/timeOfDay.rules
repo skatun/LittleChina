@@ -1,0 +1,103 @@
+val logName = "time of day"
+val morningWeekdays = 7
+val morningWeekends = 8
+val nightWeekdays = 23
+val nightWeekends = 0
+val preHeatMinutes = 15
+val evenings = 20
+val afternoon = 10
+
+rule "Calculate time of day state"
+when
+  // There MUST be a trigger for every time of day start time
+  System started or
+  Channel 'astro:sun:home:rise#event' triggered START or
+  Channel 'astro:sun:home:set#event' triggered START or
+  Channel 'astro:sun:minus60:set#event' triggered START or
+  Time cron "0 0 7 * * ? *" or // Morning weekdays
+  Time cron "0 0 9 * * ? *" or // Morning weekends
+  Time cron "0 45 6 * * ? *" or // Preheat weekdays
+  Time cron "0 45 8 * * ? *" or // Preheat weekends
+  Time cron "0 0 23 * * ? *" or // Night weekdays
+  Time cron "0 0 20 * * ? *" or // Evenings
+  Time cron "1 0 0 * * ? *"  or// Night weekends 
+  Item Light_All_Off received command OFF 
+ 
+then
+
+
+  // Now that we can use more than one cron trigger we don't need the sleep and can trigger the rule to occur one second after midnight
+
+  // Is it the weekend?
+  //val isWeekend = if(now.dayOfWeek >= 6) true else false // you will need to verify that Sat is 6 and Sun is 7
+
+  // Use the morning and night hour based on isWeekend
+  //val morning_hour = if(isWeekend) morningWeekends else morningWeekdays
+  //val night_hour = if(isWeekend) nightWeekends else nightWeekdays
+
+	val morning_hour= morningWeekdays
+	val night_hour = nightWeekdays
+
+  // Calculate the start time in epoch for ALL states
+  val long preHeat_start   = now.withTimeAtStartOfDay.plusHours(morning_hour).minusMinutes(15).millis // 15 minutes before morning_start
+  val long morning_start   = now.withTimeAtStartOfDay.plusHours(morning_hour).millis // morning_hour based on isWeekend
+  val long day_start       = now.withTimeAtStartOfDay.plusHours(morning_hour).millis//(vSunrise_Time.state as DateTimeType).calendar.timeInMillis // Astro
+  val long afternoon_start = now.withTimeAtStartOfDay.plusHours(afternoon).millis //(vEvening_Time.state as DateTimeType).calendar.timeInMillis // Astro
+  //val long evening_start   = (vSunset_Time.state as DateTimeType).calendar.timeInMillis // Astro
+  val long night_start     = now.withTimeAtStartOfDay.plusHours(night_hour).millis // night_hour based on isWeekend
+  val long sunset_start = (vSunrise_Time.state as DateTimeType).calendar.timeInMillis
+  val long evening_start = now.withTimeAtStartOfDay.plusHours(evenings).millis
+  val long tomorrow_start = now.withTimeAtStartOfDay.plusHours(evenings).millis
+
+
+  var curr = "UNKNOWN"
+
+  switch now {
+    case now.isAfter(preHeat_start) && now.isBefore(morning_start):{   
+        curr = "PREHEAT"
+    }
+
+    case now.isAfter(morning_start) && now.isBefore(day_start):{       
+        curr = "MORNING"
+        //Chart_Scene_DayMode.sendCommand(2)
+    }
+
+    case now.isAfter(day_start) && now.isBefore(afternoon_start):{     
+        curr = "DAY"
+        //Chart_Scene_DayMode.sendCommand(3)
+    }
+
+    case now.isAfter(afternoon_start) && now.isBefore(evening_start):{
+        curr = "AFTERNOON"
+    }
+
+    case now.isBefore(sunset_start) && now.isAfter(evening_start) && now.isBefore(tomorrow_start) : {
+        curr = curr
+    }
+
+    case now.isAfter(sunset_start)  && now.isAfter(evening_start) && now.isBefore(tomorrow_start) :{ 
+        curr = "EVENING"
+    }
+
+    case now.isAfter(night_start) : {
+        curr = "NIGHT"
+    }
+    
+  }
+
+  // These could probably be made a part of the switch statement but seems OK here
+  // However, this will only work if the state will be set to ON at some point  that makes sense.
+  if (Light_All_Off.state==OFF && now.isAfter(morning_start) && now.isBefore(afternoon_start)){
+    curr = "WORK"
+  }
+  //if Alexa_Off.state==OFF && now.isAfter(evening_start) && now.isBefore(night_start){
+       //curr = "NIGHT" //Going earlier to bed     
+  //}
+  
+
+  if(vTimeOfDay.state.toString != curr) {
+    logInfo(logName, "Current time of day is now " + curr)
+    vTimeOfDay.sendCommand(curr)
+  }
+
+end

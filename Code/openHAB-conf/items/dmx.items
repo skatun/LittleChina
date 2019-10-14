@@ -1,0 +1,66 @@
+ Color LL1 "LL1" (Group_Livingroom_Lights,Group_Livingroom_Lights_Dinner,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL1_thing:color" }
+ Color LL2 "LL2" (Group_Livingroom_Lights,Group_Livingroom_Lights_Dinner,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL2_thing:color" }
+ Color LL3 "LL3" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL3_thing:color" }
+ Color LL4 "LL4" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL4_thing:color" }
+ Color LL5 "LL5" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL5_thing:color" }
+ Color LL6 "LL6" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL6_thing:color" }
+ Color LL7 "LL7" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL7_thing:color" }
+ Color LL8 "LL8" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL8_thing:color" }
+ Color LL9 "LL9" (Group_Livingroom_Lights,Group_Livingroom_Lights_Dinner,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL9_thing:color" }
+ Color LL10 "LL10" (Group_Livingroom_Lights,Group_Livingroom_Lights_Dinner,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL10_thing:color" }
+ Color LL11 "LL11" (Group_Livingroom_Lights,Group_Livingroom_Lights_Dinner,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL11_thing:color" }
+ Color LL12 "LL12" (Group_Livingroom_Lights,Group_Livingroom_Lights_Dinner,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL12_thing:color" }
+ Color LL13 "LL13" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitche,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL13_thing:color" }
+ Color LL14 "LL14" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL14_thing:color" }
+ Color LL15 "LL15" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking) { channel="dmx:color:mybridge:LL15_thing:color" }
+ Color LL16 "LL16" (Group_Livingroom_Lights) { channel="dmx:color:mybridge:LL16_thing:color" }
+ Color LL17 "LL17" (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge) { channel="dmx:color:mybridge:LL17_thing:color" }
+ Color LL18 "LL18" (Group_Livingroom_Lights,Group_Livingroom_Lights_Reading) { channel="dmx:color:mybridge:LL18_thing:color" }
+ Color LL19 "LL19" (Group_Livingroom_Lights,Group_Livingroom_Lights_Reading) { channel="dmx:color:mybridge:LL19_thing:color" }
+ Color LL20 "LL20" (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge) { channel="dmx:color:mybridge:LL20_thing:color" }
+ Color LL21 "LL21" (Group_Livingroom_Lights) { channel="dmx:color:mybridge:LL21_thing:color" }
+ Color LL22 "LL22" (Group_Livingroom_Lights,Group_Livingroom_Lights_Reading) { channel="dmx:color:mybridge:LL22_thing:color" }
+ Color LL23 "LL23" (Group_Livingroom_Lights,Group_Livingroom_Lights_Reading) { channel="dmx:color:mybridge:LL23_thing:color" }
+ Color LL24 "LL24" (Group_Livingroom_Lights,Group_Livingroom_Lights_Fireplace) { channel="dmx:color:mybridge:LL24_thing:color" }
+ Color LL25 "LL25" (Group_Livingroom_Lights,Group_Livingroom_Lights_Fireplace) { channel="dmx:color:mybridge:LL25_thing:color" }
+ //Color LL26 "LL26" (Group_Livingroom_Lights) { channel="dmx:color:mybridge:LL26_thing:color" }
+ Color LL27 "LL27" (Group_Livingroom_Lights,Group_Livingroom_Lights_Fireplace) { channel="dmx:color:mybridge:LL27_thing:color" }
+ //Color LL28 "LL28" (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge,Group_Livingroom_Lights_Reading) { channel="dmx:color:mybridge:LL28_thing:color" }
+ Color LL29 "LL29" (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge,Group_Livingroom_Lights_Reading) { channel="dmx:color:mybridge:LL29_thing:color" }
+ Color LL30 "LL30" (Group_Livingroom_Lights) { channel="dmx:color:mybridge:LL30_thing:color" }
+ Color LB1 "LB1" (Group_Livingroom_Lights,Group_Livingroom_Lights_Bar) { channel="dmx:color:mybridge:LB1_thing:color" }
+ Color LB2 "LB2" (Group_Livingroom_Lights,Group_Livingroom_Lights_Bar) { channel="dmx:color:mybridge:LB2_thing:color" }
+ Color LB3 "LB3" (Group_Livingroom_Lights,Group_Livingroom_Lights_Bar) { channel="dmx:color:mybridge:LB3_thing:color" }
+ Color LB4 "LB4" (Group_Livingroom_Lights,Group_Livingroom_Lights_Bar) { channel="dmx:color:mybridge:LB4_thing:color" }
+ Color LB5 "LB5" (Group_Livingroom_Lights,Group_Livingroom_Lights_Bar) { channel="dmx:color:mybridge:LB5_thing:color" }
+ Color LB6 "LB6" (Group_Livingroom_Lights,Group_Livingroom_Lights_Bar) { channel="dmx:color:mybridge:LB6_thing:color" }
+
+ Color LMB1 "LMB1" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB1_thing:color" }
+ Color LMB2 "LMB2" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB2_thing:color" }
+ Color LMB3 "LMB3" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB3_thing:color" }
+ Color LMB4 "LMB4" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB4_thing:color" }
+ Color LMB5 "LMB5" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB5_thing:color" }
+ Color LMB6 "LMB6" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB6_thing:color" }
+ Color LMB7 "LMB7" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB7_thing:color" }
+ Color LMB8 "LMB8" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB8_thing:color" }
+ Color LMB9 "LMB9" (Group_MasterBedroom_Lights) { channel="dmx:color:mybridge:LMB9_thing:color" }
+
+ Color LT1 "LT1" (Group_Bathroom_Lights) { channel="dmx:color:mybridge:LT1_thing:color" }
+ Color LT2 "LT2" (Group_Bathroom_Lights) { channel="dmx:color:mybridge:LT2_thing:color" }
+ Color LT3 "LT3" (Group_Bathroom_Lights) { channel="dmx:color:mybridge:LT3_thing:color" }
+ Color LT4 "LT4" (Group_Bathroom_Lights) { channel="dmx:color:mybridge:LT4_thing:color" }
+ Color LT5 "LT5" (Group_Bathroom_Lights) { channel="dmx:color:mybridge:LT5_thing:color" }
+ Color LT6 "LT6" (Group_Bathroom_Lights) { channel="dmx:color:mybridge:LT6_thing:color" }
+
+ Color LGB1 "LGB1" (Group_GuestBedroom_Lights) { channel="dmx:color:mybridge:LGB1_thing:color" }
+ Color LGB2 "LGB2" (Group_GuestBedroom_Lights) { channel="dmx:color:mybridge:LGB2_thing:color" }
+ Color LGB3 "LGB3" (Group_GuestBedroom_Lights) { channel="dmx:color:mybridge:LGB3_thing:color" }
+ Color LGB4 "LGB4" (Group_GuestBedroom_Lights) { channel="dmx:color:mybridge:LGB4_thing:color" }
+ Color LGB5 "LGB5" (Group_GuestBedroom_Lights) { channel="dmx:color:mybridge:LGB5_thing:color" }
+ Color LGB6 "LGB6" (Group_GuestBedroom_Lights) { channel="dmx:color:mybridge:LGB6_thing:color" }
+
+
+ //Switch MyChaserItem "My Chaser Item" (Group_Livingroom_Lights) { channel="dmx:chaser:mybridge:ampel:switch" }
+ //Color MyColorItem "My Color Item" (Group_Livingroom_Lights){ channel="dmx:color:mybridge:rgb:color" }
+ //Dimmer MyDimmerItem "My Dimmer Item" (Group_Livingroom_Lights){ channel="dmx:dimmer:mybridge:single:brightness" }
+ 

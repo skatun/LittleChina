@@ -1,0 +1,40 @@
+/* Heating */
+Group Group_Heating
+Group Group_SetPoint
+Group Group_SetPoint_Command
+Group Group_SetPoint_Night
+Group Group_SetPoint_Day 
+Group Group_SetPoint_PreHeat
+Group Group_SetPoint_Morning
+
+Switch Heating_Override(Group_Heating)
+Switch Hallway_Heating (Group_Heating)  {gpio="pin:27" } //Relay 9
+Switch Livingroom_Heating (Group_Heating)   {gpio="pin:04" } //Relay 7
+Switch Kitchen_Heating (Group_Heating)  {gpio="pin:06" }//Relay8
+Switch Bathroom_Heating (Group_Heating){gpio="pin:16" }//Relay 6
+Switch MasterBedroom_Heating (Group_Heating){gpio="pin:21" }//Relay 11
+Switch GuestBedroom_Heating (Group_Heating){gpio="pin:5" }//Relay 10
+    
+Number Livingroom_Heating_Setpoint (Group_SetPoint,Group_SetPoint_Command,Group_Livingroom,Group_Chart)
+Number GuestBedroom_Heating_Setpoint (Group_SetPoint,Group_SetPoint_Command,Group_GuestBedroom)
+Number MasterBedroom_Heating_Setpoint (Group_SetPoint,Group_SetPoint_Command,Group_MasterBedroom)
+Number Bathroom_Heating_Setpoint (Group_SetPoint,Group_SetPoint_Command,Group_Bathroom)
+
+Number Livingroom_Heating_Setpoint_Night (Group_SetPoint,Group_SetPoint_Night,Group_Livingroom)
+Number GuestBedroom_Heating_Setpoint_Night (Group_Setpoint_Special,Group_SetPoint,Group_SetPoint_Special_Night_Guests, Group_GuestBedroom)
+Number MasterBedroom_Heating_Setpoint_Night (Group_SetPoint,Group_SetPoint_Night, Group_MasterBedroom)
+Number Bathroom_Heating_Setpoint_Night (Group_SetPoint,Group_SetPoint_Night, Group_Bathroom)
+
+Number Livingroom_Heating_Setpoint_Day (Group_SetPoint,Group_SetPoint_Morning, Group_SetPoint_Day, Group_SetPoint_PreHeat,Group_Livingroom)
+Number GuestBedroom_Heating_Setpoint_Day (Group_Setpoint_Special,Group_SetPoint,Group_SetPoint_Special_PreHeat_Guests, Group_SetPoint_Special_Morning_Guests, Group_SetPoint_Special_Day_Guests,Group_GuestBedroom)
+Number MasterBedroom_Heating_Setpoint_Day (Group_SetPoint,Group_SetPoint_Morning, Group_SetPoint_Day,Group_SetPoint_PreHeat,Group_MasterBedroom)
+Number Bathroom_Heating_Setpoint_Day (Group_SetPoint,Group_SetPoint_Morning, Group_SetPoint_Day,Group_SetPoint_PreHeat,Group_Bathroom)
+
+Number Livingroom_Heating_Setpoint_Away (Group_Setpoint_Special,Group_SetPoint,Group_SetPoint_Work,Group_Livingroom)
+Number GuestBedroom_Heating_Setpoint_Away (Group_Setpoint_Special,Group_SetPoint,Group_SetPoint_Morning, Group_SetPoint_Day, Group_SetPoint_PreHeat,Group_SetPoint_Special_Work_Guests,Group_GuestBedroom)
+Number MasterBedroom_Heating_Setpoint_Away (Group_Setpoint_Special,Group_SetPoint,Group_SetPoint_Work,Group_MasterBedroom)
+Number Bathroom_Setpoint_Away (Group_Setpoint_Special,Group_SetPoint,Group_SetPoint_Work,Group_Bathroom)
+
+Number Livingroom_Heating_Setpoint_Evening (Group_SetPoint,Group_SetPoint_Evening,Group_Livingroom)
+Number Setpoint_Heating_Holiday (Group_SetPoint_Special_Holiday,Group_Setpoint_Special,Group_SetPoint)
+

@@ -1,0 +1,22 @@
+import org.eclipse.smarthome.model.script.actions.Timer
+import org.joda.time.DateTime
+
+var Timer DoorTimer=null
+var Number changes = 0
+var DateTime timeFirstChange
+val Number changesPerRing = 5
+
+rule "Turn off door relay"
+when
+	Item Door_Opener changed  to ON
+then
+  
+	//Chromecast_LivingRoom_Playuri.sendCommand('/etc/openhab2/conf/html/test.mp4')
+	
+  //playStream("chromecast:chromecast:chromecast_livingRoom","/etc/openhab2/conf/html/test.mp4")
+	DoorTimer = createTimer(now.plusSeconds(6))[|
+	sendCommand(Div_DoorOpener, OFF)
+	sendMail("skatun@gmail.com","Door open with alexa or android","AirBnb guest arrived")
+	//Chromecast_LivingRoom_Playuri.sendCommand('https://www.youtube.com/watch?v=8W4FP8ZD06I&t=24s')
+]
+end

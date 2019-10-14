@@ -1,0 +1,50 @@
+/* Network information*/
+String Network_AdapterName        "Adapter name"        <network>        { channel="systeminfo:computer:work:network#networkDisplayName" }
+String Network_Name               "Name"                <network>        { channel="systeminfo:computer:work:network#networkName" }
+String Network_IP                 "IP address"          <network>        { channel="systeminfo:computer:work:network#ip" }
+String Network_Mac                "Mac address"         <network>        { channel="systeminfo:computer:work:network#mac" }
+Number Network_DataSent           "Data sent"           <flowpipe>       { channel="systeminfo:computer:work:network#dataSent" }
+Number Network_DataReceived       "Data received"       <returnpipe>     { channel="systeminfo:computer:work:network#dataReceived" }
+Number Network_PacketsSent        "Packets sent"        <flowpipe>       { channel="systeminfo:computer:work:network#packetsSent" }
+Number Network_PacketsReceived    "Packets received"    <returnpipe>     { channel="systeminfo:computer:work:network#packetsReceived" }
+
+/* CPU information*/
+String CPU_Name                   "Name"                <none>           { channel="systeminfo:computer:work:cpu#name" }
+String CPU_Description            "Description"         <none>           { channel="systeminfo:computer:work:cpu#description" }
+Number CPU_Load                   "Load"                <none>           { channel="systeminfo:computer:work:cpu#load"}
+Number CPU_Load1                  "Load (1 min)"        <none>           { channel="systeminfo:computer:work:cpu#load1" }
+Number CPU_Load5                  "Load (5 min)"        <none>           { channel="systeminfo:computer:work:cpu#load5" }
+Number CPU_Load15                 "Load (15 min)"       <none>           { channel="systeminfo:computer:work:cpu#load15" }
+Number CPU_Threads                "Threads"             <none>           { channel="systeminfo:computer:work:cpu#threads" }
+Number CPU_Uptime                 "Uptime"              <time>           { channel="systeminfo:computer:work:cpu#uptime" }
+
+
+/* Storage information*/
+String Storage_Name               "Name"                <none>           { channel="systeminfo:computer:work:storage#name" }
+String Storage_Type               "Type"                <none>           { channel="systeminfo:computer:work:storage#type" }
+String Storage_Description        "Description"         <none>           { channel="systeminfo:computer:work:storage#description" }
+Number Storage_Available          "Available"           <none>           { channel="systeminfo:computer:work:storage#available" }
+Number Storage_Used               "Used"                <none>           { channel="systeminfo:computer:work:storage#used" }
+Number Storage_Total              "Total"               <none>           { channel="systeminfo:computer:work:storage#total" }
+Number Storage_Available_Percent  "Available (%)"       <none>           { channel="systeminfo:computer:work:storage#availablePercent" }
+Number Storage_Used_Percent       "Used (%)"            <none>           { channel="systeminfo:computer:work:storage#usedPercent" }
+
+/* Memory information*/
+Number Memory_Available           "Available"           <none>           { channel="systeminfo:computer:work:memory#available" }
+Number Memory_Used                "Used"                <none>           { channel="systeminfo:computer:work:memory#used" }
+Number Memory_Total               "Total"               <none>           { channel="systeminfo:computer:work:memory#total" }
+Number Memory_Available_Percent   "Available (%)"       <none>           { channel="systeminfo:computer:work:memory#availablePercent" }
+Number Memory_Used_Percent        "Used (%)"            <none>           { channel="systeminfo:computer:work:memory#usedPercent" }
+
+/* Swap memory information*/
+Number Swap_Available             "Available"           <none>           { channel="systeminfo:computer:work:swap#available" }
+Number Swap_Used                  "Used"                <none>           { channel="systeminfo:computer:work:swap#used" }
+Number Swap_Total                 "Total"               <none>           { channel="systeminfo:computer:work:swap#total" }
+Number Swap_Available_Percent     "Available (%)"       <none>           { channel="systeminfo:computer:work:swap#availablePercent" }
+Number Swap_Used_Percent          "Used (%)"            <none>           { channel="systeminfo:computer:work:swap#usedPercent" }
+
+
+
+/* Sensors information*/
+Number Sensor_CPUTemp             "CPU Temperature"     <temperature>    { channel="systeminfo:computer:work:sensors#cpuTemp" }
+

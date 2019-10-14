@@ -1,0 +1,36 @@
+rule "Initialize all items"
+when
+    System started
+then
+    logInfo(    "Initializer", "Started OH RunTime ...")
+    sendMail("skatun@gmail.com","OpenHAB","System started")
+    logInfo("Initializer", "... initializing!")
+
+    createTimer(now.plusSeconds(60)) [|
+
+        Group_Dimmers.allMembers.filter( x | x.state == Uninitialized || x.state == Undefined).forEach[ item |
+            item.sendCommand(0)
+        ]
+        
+        Group_ColorPickers.allMembers.filter( x | x.state == Uninitialized || x.state == Undefined).forEach[ item |
+            item.sendCommand(ON)
+        ]
+
+        Group_Temperature.allMembers.filter( x | x.state == Uninitialized || x.state == Undefined).forEach[ item |
+            item.sendCommand(21)
+        ]
+
+        Group_SetPoint.allMembers.filter( x | x.state == Uninitialized || x.state == Undefined).forEach[ item |
+            item.sendCommand(21)
+        ]
+        
+        Group_Heating.allMembers.filter( x | x.state == Uninitialized || x.state == Undefined).forEach[ item |
+            item.sendCommand(OFF)
+        ]
+
+        Door_Opener.sendCommand(OFF)
+        vTimeOfDay.sendCommand("NIGHT")
+        Presence_Home.sendCommand(ON)
+    ]
+    
+end

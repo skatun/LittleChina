@@ -1,0 +1,8 @@
+Group Group_Room_Temperature
+
+Group:Number:AVG Livingroom_Temperature "Average Temperature [%.1f �C]" <temperature> (Group_Room_Temperature)
+Group:Number:AVG MasterBedroom_Temperature "Average Temperature [%.1f �C]" <temperature> (Group_Room_Temperature)
+Group:Number:AVG GuestBedroom_Temperature "Average Temperature [%.1f �C]" <temperature> (Group_Room_Temperature)
+Group:Number:AVG Bathroom_Temperature "Average Temperature [%.1f �C]" <temperature> (Group_Room_Temperature)
+Group:Number:AVG Hallway_Temperature "Average Temperature [%.1f �C]" <temperature> (Group_Room_Temperature)
+Group:Number:AVG Balcony_Temperature "Average Temperature [%.1f �C]" <temperature> (Group_Room_Temperature)

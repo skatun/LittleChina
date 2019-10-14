@@ -1,0 +1,8 @@
+rule "A sensor stopped reporting"
+when
+    Member of Group_Sensors changed to UNDEF
+then
+    // report alert on triggeringItem
+	sendMail("skatun@gmail.com","OpenHAB-Sensor","A sensor has an error")
+    logInfo("Notification", "... Sensor error!")
+end

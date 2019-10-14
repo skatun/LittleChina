@@ -1,0 +1,78 @@
+	/* Lights */
+	
+	Group Group_Livingroom
+	Group Group_Kitchen
+	Group Group_Hallway
+	Group Group_Balcony
+	Group Group_GuestBedroom
+	Group Group_MasterBedroom
+	Group Group_Bathroom
+
+	Group Group_Lights
+
+	Group Group_Livingroom_Lights(Group_Lights)
+	Group Group_Livingroom_Lights_Reading
+	Group Group_Livingroom_Lights_Kitchen 
+	Group Group_Livingroom_Lights_Dinner
+	Group Group_Livingroom_Lights_Cooking
+	Group Group_Livingroom_Lights_Lounge
+	Group Group_Livingroom_Lights_Fireplace
+	Group Group_Livingroom_Lights_Bar
+
+	Group Group_MasterBedroom_Lights(Group_Lights)
+	Group Group_MasterBedroom_Lights_Reading
+	Group Group_GuestBedroom_Lights(Group_Lights)
+	Group Group_Bathroom_Lights(Group_Lights)
+	Group Group_Balcony_Lights(Group_Lights)
+	Group Group_Hallway_Lights(Group_Lights)
+
+	Group Group_Scenes
+	Group Group_Dimmers
+	Group Group_Moods
+	Group Group_ColorPickers
+
+	Number Livingroom_Scene "Scene Selector"(Group_Scenes)
+	Number MasterBedroom_Scene "Scene Selector"(Group_Scenes)
+	Number Bathroom_Scene "Scene Selector"(Group_Scenes)
+	Number GuestBedroom_Scene "Scene Selector"(Group_Scenes)
+	Number Hallway_Scene "Scene Selector"(Group_Scenes)
+	Number Balcony_Scene "Scene Selector"(Group_Scenes)
+
+	Color Livingroom_ColorPicker "Living room" (Group_ColorPickers) ["Lighting"]
+	Color MasterBedroom_ColorPicker "Master Bedroom" (Group_ColorPickers) ["Lighting"]
+	Color GuestBedroom_ColorPicker "Guest Bedroom" (Group_ColorPickers) ["Lighting"]
+	Color Bathroom_ColorPicker "Bathroom" (Group_ColorPickers) ["Lighting"]
+
+	Number Livingroom_MoodSelector "Mood Selector" (Group_Moods)
+	Number MasterBedroom_MoodSelector "Mood Selector" (Group_Moods)
+	Number GuestBedroom_MoodSelector "Mood Selector" (Group_Moods)
+	Number Bathroom_MoodSelector "Mood Selector" (Group_Moods)
+
+	Dimmer Livingroom_Dimmer "Dimmer" (Group_Dimmers)
+	Dimmer MasterBedroom_Dimmer "Dimmer" (Group_Dimmers)
+	Dimmer GuestBedroom_Dimmer "Dimmer" (Group_Dimmers)
+	Dimmer Bathroom_Dimmer "Dimmer" (Group_Dimmers)
+
+
+	// { gpio="pin:13" }
+	
+	Switch Light_All_Off "All Light" [ "Lighting" ]
+	
+	/* Wall light*/
+	Switch Livingroom_Light_Wall_Dinner 	"Wall Dinner"  (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge)  { gpio="pin:13" } //Relay 13
+	Switch Livingroom_Light_Wall_TV 	"Wall TV"  (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge)  { gpio="pin:24" } //Relay 14
+	Switch Livingroom_Light_Wall_FirePlace 	"Wall FirePlace"  (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge,Group_Livingroom_Lights_Fireplace)  { gpio="pin:26" } //Relay 15
+	Switch Livingroom_Light_Wall_Fusebox "Wall Fusebox"  (Group_Livingroom_Lights,Group_Livingroom_Lights_Lounge,Group_Livingroom_Lights_Fireplace) {gpio="pin:18"}   //Relay 16
+	
+	/*Kitchen*/
+	Switch Livingroom_Light_Kitchen "Kitchen" (Group_Livingroom_Lights,Group_Livingroom_Lights_Kitchen,Group_Livingroom_Lights_Cooking)   { gpio="pin:23" } //Relay 4
+	
+	/*Hallway*/
+	Switch Livingroom_Light_Hallway "Hallway" (Group_Hallway_Lights)  { gpio="pin:25" } //Relay 12
+	
+	
+	/*Balcony*/
+	Switch Balcony_Light_OutletDouble "Outdoor" (Group_Balcony_Lights) { gpio="pin:20" } //relay  3
+
+
+	Color MasterBedroom_Light_Bed "Bed light" (Group_MasterBedroom_Lights,Group_MasterBedroom_Lights_Reading) { channel="mqtt:topic:MqttBroker:ledStrip1:lampcolor"}
